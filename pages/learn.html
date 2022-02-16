@@ -78,8 +78,6 @@
             <p>A <strong>tileset</strong> is a file containing tiles (fixed-size sprites), which are used for almost everything in the modding process. The modding API currently splits the tileset into 8x8 tiles, numbered sequentially. To determine a tile ID quickly, we recommend using <a href="https://www.mapeditor.org/">Tiled Map Editor</a>.</p>
             <p>A <strong>tilemap</strong> is a JSON file that explains where each tile in a given map should be located and on what layer. The Rayfield Engine uses layers of the tilemap to store important information, including scripted entities and their assigned movement or dialogue. Once again, we recommend using Tiled Map Editor. The Rayfield engine runs at a 320x152 resolution, and therefore tilemaps are anticipated to be at that size.</p>
             <p><strong>Purgatory files</strong> are a type of file written in the Purgatory Graph Language (the compiler of which is also closed-source and proprietary). It's both simple and bizarre as a language, albeit a bit flaky at times. Maintaining Purgatory code can be tricky and tedious, but I'd imagine it's less so than writing the equivalent into the engine directly. Plus, it is an easy way to mod existing Rayfield games.</p>
-            <h2>Your First Mod</h2>
-            <p>TODO: Waiting to connect to the API and build a simple Create page interface.</p>
             <h2>A Primer on the Purgatory Graph Language</h2>
             <p>The Purgatory Graph Language is a two-part, tag-based language that represents graphs.</p>
             <h3>Content (Nodes)</h3>
@@ -143,7 +141,7 @@ nur
 </code></pre>
             </p>
 
-            <p>This dialogue would proceed as a simple "Greetings!" followed by "May I have a loan?" unless the player has more than $400. In that case, the player is free to choose the second option and elicit a surprised response from Char.</p>
+            <p>This dialogue would proceed as a simple "Greetings!" followed by "May I have a loan?" unless the player has more than $400. In that case, the player is free to choose the second option and elicit a surprised response from Char. Note that this script will not work as-is, since there is no node with a magic name (see below).</p>
 
             <h3>AI / Scripted Movement / Animation</h3>
             <p>This is where we have the last major trick of Purgatory -- return overrides. Attached behavior executes within a function that returns a <code>String</code>. The animation engine waits for a function to return <code>"DONE"</code>, at which point updates to the object are suspended. The key function to simplify the movement process is <code>data.bmove</code>, which takes distance, direction, and speed, returning <code>false</code> when done moving. This script is executed every frame, so it should be light on computations for best performance.</p>
@@ -161,8 +159,22 @@ nur
 
             <p>One more note: multi-step animations are possible with the engine. Using the postscript, once <code>"DONE"</code> is received, the engine will move to the next adjacent node.</p>
 
+            <h2>Layer-based Map Markup and Design</h2>
+            <p>Every map must have a layer titled "main layer" and a layer titled "spawn layer". The <strong>main layer</strong> consists solely of static objects, which are fixed in place and rendered immediately.</p>
+            <p>The <strong>spawn layer</strong> is a markup layer, meaning it is never rendered by the engine, and contains only tiles with ids 26 through 29. These tiles are used to mark the cardinal entrances of the map, where conventionally, tile 26 is placed at the left, tile 27 at the right, tile 28 at the top, and tile 29 at the bottom. The game uses these as spawn locations. It is not required to use all the tiles in a given map, and the flexibility of the navigation script means left, right, up, and down are more entrance names than obligations.</p>
+            <p>The <strong>entity layer</strong> contains tiles that are not necessarily static (ready for dialogue and/or movement). Tiles in the entity layer are invisible by default, but are visible and granted collision if attached to movement and/or dialogue.</p>
+            <p>The <strong>dialogue layer</strong> is a markup layer to designate which lines of dialogue should be granted to which entities. Any tile can be used in the dialogue layer. The <strong>movement layer</strong> is exactly the same way, but designates movement and is less entity-specific than the dialogue system; all entities that have the same background tile in the movement layer will have the same movement.</p>
+
             <h2>Magic Names and the Art of Connecting the Map Editor to Purgatory</h2>
-            <p>Coming soon!</p>
+            <p>For every script, the engine relies on IDs and filenames to apply Purgatory behavior to the underlying maps. The specific combination of said IDs and filenames determines "magic names". Each script has a slightly different approach:</p>
+
+            <ul>
+                <li>Conditional Dialogue (condialogue): mapname_entityID_tileOnDialogueLayerID</li>
+                <li>Movement (basic_ai): mapname_tileOnMovementLayerID</li>
+                <li>Mapping (navigator): mapname_(left/right/up/down)</li>
+            </ul>
+
+            <p>Naming the root node of dialogue, the root of movement, or every node in navigation with a magic name informs the engine of where to start, leaving the engine open to fairly significant modding efforts.</p>
 
             </div>
 
