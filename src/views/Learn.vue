@@ -1,41 +1,9 @@
-<!DOCTYPE html>
-<html>
-
-    <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/styles.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Learn - Modding the Rayfield Engine</title>
-    </head>
-
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/index.html">Modding the Rayfield Engine</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/index.html">Home</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Learn <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/pages/play.html">Play</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/pages/create.html">Create</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class="container">
+<template>
+<div class="container">
             <h1>Learn</h1>
             <p>Welcome to the learn page! Let's get started.</p>
             <h2>How to Play</h2>
-            <p>Rayfield games are quite simple to learn due to their unified control scheme. The developers note gamepad support; I haven't tested it, since the Gamepad API didn't work properly on my system. Note that South refers to the X button on DualShock controllers and the A button on X-Box controllers. Without further ado, here are the main inputs.</p>
+            <p>Rayfield games are quite simple to learn due to their unified control scheme. The developers note gamepad support; I haven't tested it, since the Gamepad API didn't work properly on my system. Note that South refers to the X button on DualShock controllers and the A button on Xbox controllers. Without further ado, here are the main inputs.</p>
             <table class="table">
                 <thead>
                 <tr>
@@ -177,13 +145,11 @@ nur
             <p>Naming the root node of dialogue, the root of movement, or every node in navigation with a magic name informs the engine of where to start, leaving the engine open to fairly significant modding efforts.</p>
 
             </div>
+</template>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-        <hr/>
-        <footer>See the code for this project <a href="https://github.com/MegosAlpha/modding-the-rayfield-engine">here</a>.</footer>
-    </body>
-
-</html>
+<script>
+export default {
+  name: 'Learn',
+  components: {}
+}
+</script>
