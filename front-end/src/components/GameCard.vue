@@ -6,18 +6,18 @@
 </template>
 
 <script>
-export default {
-  name: 'GameCard',
-  props: {
-    gameName: String,
-    userName: String
+  export default {
+    name: 'GameCard',
+    props: {
+      gameName: String,
+      userName: String
+    }
   }
-}
 </script>
 
 <style scoped>
-.container {
-  border-style: dashed;
-  flex: 0 0 33.333333%;
-}
+  .container {
+    border-style: dashed;
+    flex: 0 0 33.333333%;
+  }
 </style>
